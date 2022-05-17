@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import DTO.KhachHangDTO;
 
-
 public class KhachHangDAO {
 	ConnectUnit connect;
 
@@ -22,10 +21,10 @@ public class KhachHangDAO {
 			KhachHangDTO kh = new KhachHangDTO();
 			kh.setMaKH(result.getString("maKH"));
 			kh.setTenKH(result.getString("tenKH"));
-		
+
 			kh.setDiaChi(result.getString("diaChi"));
 			kh.setSDT(result.getInt("SDT"));
-			
+
 			kh.setGioiTinh(result.getString("gioiTinh"));
 			list_khachhang.add(kh);
 		}
@@ -41,6 +40,21 @@ public class KhachHangDAO {
 		return docDB(null);
 	}
 
+	public KhachHangDTO selectMaKH(String maKH) throws Exception {
+		connect = new ConnectUnit();
+		KhachHangDTO kh = new KhachHangDTO();
+		String condition = " maKH  = '" + maKH + "'";
+		ResultSet result = this.connect.Select("tbl_khachhang", condition);
+		while (result.next()) {	
+			kh.setMaKH(result.getString("maKH"));
+			kh.setTenKH(result.getString("tenKH"));
+			kh.setDiaChi(result.getString("diaChi"));
+			kh.setSDT(result.getInt("SDT"));
+			kh.setGioiTinh(result.getString("gioiTinh"));
+		}
+		connect.Close();
+		return kh;
+	}
 	/**
 	 * Tạo thêm 1 hdách hàng dựa theo đã có thông tin trước
 	 * 

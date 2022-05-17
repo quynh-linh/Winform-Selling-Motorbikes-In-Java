@@ -47,6 +47,14 @@ public class loaixeBUS {
 		}
 		return "";
 	}
+	public String getMaLoai(String tenLoai) {
+		for (LoaiXe loai : list_lxs) {
+			if (loai.getTenLoai().equals(tenLoai)) {
+				return loai.getMaLoai();
+			}
+		}
+		return "";
+	}
 
 	// -----------------------------------------------------------------------------------------------
 	/**

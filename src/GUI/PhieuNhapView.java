@@ -712,12 +712,12 @@ public class PhieuNhapView extends JFrame {
 		xemayDAO dal = new xemayDAO();
 		model.setRowCount(0);
 		ArrayList<XeMayDTO> dsxm = dal.search(data);
-		;
 		for (XeMayDTO xm : dsxm) {
 			Vector vec = new Vector();
 			vec.add(xm.getMaXe());
 			vec.add(xm.getTenXe());
 			vec.add(xm.getSoLuong());
+			vec.add(xm.getGiaXe());
 			model.addRow(vec);
 		}
 	}

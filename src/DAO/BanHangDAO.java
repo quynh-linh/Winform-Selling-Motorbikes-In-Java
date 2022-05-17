@@ -30,8 +30,6 @@ public class BanHangDAO {
         	result.getString("tenXe");
         	result.getBytes("image");
         	result.getInt("soLuong");
-        	
-		    System.out.println("Image retrieved successfully.");
             sanphams.add(bh);
         }
         connect.Close();

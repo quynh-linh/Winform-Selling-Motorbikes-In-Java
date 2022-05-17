@@ -133,11 +133,6 @@ public class ConnectUnit {
 	}
 
 	// Hàm hỗ trợ Insert xuống SQL
-	/**
-	 * Insert Into TableName values...
-	 * 
-	 * @throws Exception
-	 */
 	public boolean Insert(String TableName, HashMap<String, Object> ColumnValues) throws Exception {
 		// Khai báo biến StringBuilder để tạo chuỗi Select
 		StringBuilder query = new StringBuilder("Insert Into " + TableName);
@@ -164,11 +159,6 @@ public class ConnectUnit {
 	}
 
 	// hàm hỗ trợ update CSDL
-	/**
-	 * Update Tablename Set ColumnName = ColumnValues Where Condition
-	 * 
-	 * @throws Exception
-	 */
 	public boolean Update(String TableName, HashMap<String, Object> ColumnValues, String Condition) throws Exception {
 		// khai báo biến StringBuilder để tạo chuỗi CSDL
 		StringBuilder query = new StringBuilder("Update " + TableName + " Set ");
@@ -188,11 +178,6 @@ public class ConnectUnit {
 		return this.connect.executeUpdate(query.toString()) > 0;
 	}
 	// Hàm delete hỗ trợ torng CDSL
-	/**
-	 * Delete From TableName where Condition
-	 * 
-	 * @throws Exception
-	 */
 	public boolean Delete(String TableName, String Condition) throws Exception {
 		// khai báo biến StringBuilder để tạo chuỗi Select
 		StringBuilder query = new StringBuilder("Delete From " + TableName);

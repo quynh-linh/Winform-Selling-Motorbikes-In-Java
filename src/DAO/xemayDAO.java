@@ -126,7 +126,86 @@ public class xemayDAO {
 			while (result.next()) {
 				XeMayDTO xemay = new XeMayDTO();
 				xemay.setMaXe(result.getString("maXe"));
-				xemay.setTenXe(result.getString("tenXe"));
+				xemay.setTenXe(result.getString("tenXe"));  
+				xemay.setGiaXe(result.getDouble("giaXe"));
+				xemay.setSoLuong(result.getInt("soLuong"));
+				xemay.setLoaiXe(result.getString("loaiXe"));
+				xemay.setImage(result.getString("image"));
+				sanphams.add(xemay);
+			}
+			connect.Close();
+			return sanphams;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public ArrayList<XeMayDTO> searchGiaXe(String giaMIN , String giaMAX) {
+		try {
+			// kết nối CSDL
+			connect = new ConnectUnit();
+			String condition = " giaXe BETWEEN '" + giaMIN + "' AND '" + giaMAX + "' ";
+			ResultSet result = this.connect.Select("tbl_xemay", condition);
+			System.out.println(result);
+			ArrayList<XeMayDTO> sanphams = new ArrayList<>();
+			while (result.next()) {
+				XeMayDTO xemay = new XeMayDTO();
+				xemay.setMaXe(result.getString("maXe"));
+				xemay.setTenXe(result.getString("tenXe"));  
+				xemay.setGiaXe(result.getDouble("giaXe"));
+				xemay.setSoLuong(result.getInt("soLuong"));
+				xemay.setLoaiXe(result.getString("loaiXe"));
+				xemay.setImage(result.getString("image"));
+				sanphams.add(xemay);
+			}
+			connect.Close();
+			return sanphams;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public ArrayList<XeMayDTO> searchLoaiXe(String maLoai) {
+		try {
+			// kết nối CSDL
+			connect = new ConnectUnit();
+			String condition = "loaiXe = '" + maLoai + "'";
+			ResultSet result = this.connect.Select("tbl_xemay", condition);
+			System.out.println(result);
+			ArrayList<XeMayDTO> sanphams = new ArrayList<>();
+			while (result.next()) {
+				XeMayDTO xemay = new XeMayDTO();
+				xemay.setMaXe(result.getString("maXe"));
+				xemay.setTenXe(result.getString("tenXe"));  
+				xemay.setGiaXe(result.getDouble("giaXe"));
+				xemay.setSoLuong(result.getInt("soLuong"));
+				xemay.setLoaiXe(result.getString("loaiXe"));
+				xemay.setImage(result.getString("image"));
+				sanphams.add(xemay);
+			}
+			connect.Close();
+			return sanphams;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public ArrayList<XeMayDTO> searchNangCao(String name , String giaMIn , String giaMAX , String maLoai) {
+		try {
+			// kết nối CSDL
+			connect = new ConnectUnit();
+			String condition = "( giaXe BETWEEN '" + giaMIn + "' AND '" + giaMAX + "' ) AND (tenXe LIKE '%" + name + "%') \r\n"
+					+ "AND (loaiXe = '" + maLoai + "')";
+			ResultSet result = this.connect.Select("tbl_xemay", condition);
+			System.out.println(result);
+			ArrayList<XeMayDTO> sanphams = new ArrayList<>();
+			while (result.next()) {
+				XeMayDTO xemay = new XeMayDTO();
+				xemay.setMaXe(result.getString("maXe"));
+				xemay.setTenXe(result.getString("tenXe"));  
 				xemay.setGiaXe(result.getDouble("giaXe"));
 				xemay.setSoLuong(result.getInt("soLuong"));
 				xemay.setLoaiXe(result.getString("loaiXe"));

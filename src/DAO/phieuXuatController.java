@@ -57,6 +57,12 @@ public class phieuXuatController implements ActionListener , MouseListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		} else if(src.equals("Search")) {
+			this.view.search();
+			this.view.searchName();
+			this.view.searchGiaXe();
+			this.view.searchLoaiXe();
 		}
+		
 	}
 }

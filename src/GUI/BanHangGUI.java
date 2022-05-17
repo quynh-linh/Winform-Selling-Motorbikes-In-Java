@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
@@ -10,14 +11,20 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,16 +47,25 @@ import DTO.XeMayDTO;
 
 import javax.swing.table.DefaultTableModel;
 
-
 import BUS.khachHangBUS;
 import BUS.loaixeBUS;
 import BUS.NhanVienBUS;
 import BUS.xeMayBUS;
+import DAO.KhachHangDAO;
 import DAO.phieuXuatController;
 import DAO.xemayDAO;
 
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JToggleButton;
+import javax.swing.JTabbedPane;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import javax.swing.JSlider;
 
 public class BanHangGUI extends JFrame {
 
@@ -70,8 +86,11 @@ public class BanHangGUI extends JFrame {
 	private xeMayBUS mayBLL = new xeMayBUS();
 	private loaixeBUS lxBll = new loaixeBUS();
 	private JLabel lblNewLabel_image;
-	private JTextField textField;
+	private JTextField textField_nameXe;
 	private JDateChooser dateChooser;
+	private JTextField textField_giaMIN;
+	private JTextField textField_giaMAX;
+	private ButtonGroup buttonGroup_PK;
 
 	/**
 	 * Launch the application.
@@ -103,23 +122,30 @@ public class BanHangGUI extends JFrame {
 	public void init() {
 		setForeground(Color.BLACK);
 		setTitle("Bán hàng");
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("Assets/ImgeIconJava/motorcycle-icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Assets/ImgeIconJava/motorcycle-icon.png"));
 		setBackground(Color.DARK_GRAY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1158, 730);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		phieuXuatController controller = new phieuXuatController(this);
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setForeground(Color.DARK_GRAY);
+		tabbedPane.setBackground(Color.DARK_GRAY);
+		tabbedPane.setBounds(0, 0, 253, 691);
+		contentPane.add(tabbedPane);
+
 		JPanel panel_danhmuc = new JPanel();
+		tabbedPane.addTab("Home", null, panel_danhmuc, null);
 		panel_danhmuc.setForeground(Color.WHITE);
 		panel_danhmuc.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_danhmuc.setBackground(Color.DARK_GRAY);
-		panel_danhmuc.setBounds(0, 0, 253, 691);
-		contentPane.add(panel_danhmuc);
+//		panel_danhmuc.setBounds(0, 26, 253, 665);
+//		contentPane.add(panel_danhmuc);
 		panel_danhmuc.setLayout(null);
 
 		JPanel panel_3 = new JPanel();
@@ -205,7 +231,6 @@ public class BanHangGUI extends JFrame {
 
 		JButton btn_DSKhachHang = new JButton("Danh s\u00E1ch kh\u00E1ch h\u00E0ng");
 		btn_DSKhachHang.addActionListener(new ActionListener() {
-
 			public void actionPerformed(ActionEvent e) {
 				KhachHangGUI kh = new KhachHangGUI();
 				kh.show();
@@ -373,10 +398,204 @@ public class BanHangGUI extends JFrame {
 		btn_home_1_1.setBackground(Color.DARK_GRAY);
 		btn_home_1_1.setBounds(0, 178, 253, 31);
 		panel_danhmuc.add(btn_home_1_1);
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.DARK_GRAY);
+		tabbedPane.addTab("Tìm kiếm", null, panel_1, null);
+		panel_1.setLayout(null);
+
+		JLabel lblNewLabel_2 = new JLabel("Tìm kiếm sản phẩm");
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setFont(new Font("Bahnschrift", Font.BOLD, 15));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(10, 5, 228, 41);
+		panel_1.add(lblNewLabel_2);
+
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_6.setBackground(Color.DARK_GRAY);
+		panel_6.setBounds(10, 266, 228, 270);
+		panel_1.add(panel_6);
+		panel_6.setLayout(null);
+
+		JLabel lblNewLabel_3 = new JLabel("Theo phân khối xe");
+		lblNewLabel_3.setFont(new Font("Bahnschrift", Font.BOLD, 13));
+		lblNewLabel_3.setForeground(Color.WHITE);
+		lblNewLabel_3.setBounds(10, 11, 208, 25);
+		panel_6.add(lblNewLabel_3);
+
+		JRadioButton cb_50cc = new JRadioButton("50cc");
+		cb_50cc.setForeground(Color.WHITE);
+		cb_50cc.setOpaque(false);
+		cb_50cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_50cc.setBounds(6, 34, 97, 23);
+		panel_6.add(cb_50cc);
+
+		JRadioButton cb_75cc = new JRadioButton("75cc");
+		cb_75cc.setForeground(Color.WHITE);
+		cb_75cc.setOpaque(false);
+		cb_75cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_75cc.setBounds(6, 71, 97, 23);
+		panel_6.add(cb_75cc);
+
+		JRadioButton cb_125cc = new JRadioButton("125cc");
+		cb_125cc.setForeground(Color.WHITE);
+		cb_125cc.setOpaque(false);
+		cb_125cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_125cc.setBounds(6, 152, 97, 23);
+		panel_6.add(cb_125cc);
+
+		JRadioButton cb_100cc = new JRadioButton("100cc");
+		cb_100cc.setForeground(Color.WHITE);
+		cb_100cc.setOpaque(false);
+		cb_100cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_100cc.setBounds(6, 111, 97, 23);
+		panel_6.add(cb_100cc);
+
+		JRadioButton cb_175cc = new JRadioButton("175cc");
+		cb_175cc.setForeground(Color.WHITE);
+		cb_175cc.setOpaque(false);
+		cb_175cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_175cc.setBounds(6, 240, 97, 23);
+		panel_6.add(cb_175cc);
+
+		JRadioButton cb_150cc = new JRadioButton("150cc");
+		cb_150cc.setForeground(Color.WHITE);
+		cb_150cc.setOpaque(false);
+		cb_150cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_150cc.setBounds(6, 194, 97, 23);
+		panel_6.add(cb_150cc);
+
+		JRadioButton cb_200cc = new JRadioButton("200cc");
+		cb_200cc.setForeground(Color.WHITE);
+		cb_200cc.setOpaque(false);
+		cb_200cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_200cc.setBounds(121, 34, 97, 23);
+		panel_6.add(cb_200cc);
+
+		JRadioButton cb_225cc = new JRadioButton("225cc");
+		cb_225cc.setForeground(Color.WHITE);
+		cb_225cc.setOpaque(false);
+		cb_225cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_225cc.setBounds(121, 71, 97, 23);
+		panel_6.add(cb_225cc);
+
+		JRadioButton cb_250cc = new JRadioButton("250cc");
+		cb_250cc.setForeground(Color.WHITE);
+		cb_250cc.setOpaque(false);
+		cb_250cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_250cc.setBounds(121, 111, 97, 23);
+		panel_6.add(cb_250cc);
+
+		JRadioButton cb_275cc = new JRadioButton("275cc");
+		cb_275cc.setForeground(Color.WHITE);
+		cb_275cc.setOpaque(false);
+		cb_275cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_275cc.setBounds(121, 152, 97, 23);
+		panel_6.add(cb_275cc);
+
+		JRadioButton cb_300cc = new JRadioButton("300cc");
+		cb_300cc.setForeground(Color.WHITE);
+		cb_300cc.setOpaque(false);
+		cb_300cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_300cc.setBounds(121, 194, 97, 23);
+		panel_6.add(cb_300cc);
+
+		JRadioButton cb_325cc = new JRadioButton("325cc");
+		cb_325cc.setForeground(Color.WHITE);
+		cb_325cc.setOpaque(false);
+		cb_325cc.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cb_325cc.setBounds(121, 240, 97, 23);
+		panel_6.add(cb_325cc);
+		
+		buttonGroup_PK = new ButtonGroup();
+		buttonGroup_PK.add(cb_50cc);
+		buttonGroup_PK.add(cb_75cc);
+		buttonGroup_PK.add(cb_100cc);
+		buttonGroup_PK.add(cb_125cc);
+		buttonGroup_PK.add(cb_150cc);
+		buttonGroup_PK.add(cb_175cc);
+		buttonGroup_PK.add(cb_200cc);
+		buttonGroup_PK.add(cb_225cc);
+		buttonGroup_PK.add(cb_250cc);
+		buttonGroup_PK.add(cb_275cc);
+		buttonGroup_PK.add(cb_300cc);
+		buttonGroup_PK.add(cb_325cc);
+
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_7.setBackground(Color.DARK_GRAY);
+		panel_7.setBounds(10, 153, 228, 87);
+		panel_1.add(panel_7);
+		panel_7.setLayout(null);
+
+		JLabel lblNewLabel_3_1 = new JLabel("Theo giá xe");
+		lblNewLabel_3_1.setForeground(Color.WHITE);
+		lblNewLabel_3_1.setFont(new Font("Bahnschrift", Font.BOLD, 13));
+		lblNewLabel_3_1.setBounds(10, 11, 208, 25);
+		panel_7.add(lblNewLabel_3_1);
+
+		textField_giaMIN = new JTextField();
+		textField_giaMIN.setBounds(10, 42, 76, 25);
+		panel_7.add(textField_giaMIN);
+		textField_giaMIN.setColumns(10);
+
+		JLabel lblNewLabel_4 = new JLabel("to");
+		lblNewLabel_4.setFont(new Font("Bahnschrift", Font.BOLD, 15));
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setForeground(Color.WHITE);
+		lblNewLabel_4.setBounds(96, 42, 30, 25);
+		panel_7.add(lblNewLabel_4);
+
+		textField_giaMAX = new JTextField();
+		textField_giaMAX.setColumns(10);
+		textField_giaMAX.setBounds(136, 42, 82, 25);
+		panel_7.add(textField_giaMAX);
+
+		JPanel panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setBounds(10, 57, 228, 72);
+		panel_1.add(panel);
+		panel.setLayout(null);
+
+		textField_nameXe = new JTextField();
+		textField_nameXe.setBounds(10, 36, 208, 31);
+		panel.add(textField_nameXe);
+		textField_nameXe.setColumns(10);
+
+		JLabel lblNewLabel_3_2 = new JLabel("Theo tên xe");
+		lblNewLabel_3_2.setForeground(Color.WHITE);
+		lblNewLabel_3_2.setFont(new Font("Bahnschrift", Font.BOLD, 13));
+		lblNewLabel_3_2.setBounds(10, 11, 208, 25);
+		panel.add(lblNewLabel_3_2);
+
+		JButton btnNewButton = new JButton("Search");
+		btnNewButton.addActionListener(controller);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnNewButton.setIcon(null);
+		btnNewButton.setBounds(10, 575, 105, 33);
+		panel_1.add(btnNewButton);
+		
+		JButton btnXa = new JButton("Refresh");
+		btnXa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				refresh();
+			}
+		});
+		btnXa.setIcon(null);
+		btnXa.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnXa.setBounds(133, 575, 105, 33);
+		panel_1.add(btnXa);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBackground(Color.LIGHT_GRAY);
+		separator_1.setBounds(10, 562, 228, 2);
+		panel_1.add(separator_1);
 		//
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(Color.GRAY);
-		panel_2.setBounds(253, 0, 867, 691);
+		panel_2.setBounds(253, 0, 889, 691);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 
@@ -388,7 +607,7 @@ public class BanHangGUI extends JFrame {
 
 		JLabel lblNewLabel_2_1_1 = new JLabel("Danh sách sản phẩm");
 		lblNewLabel_2_1_1.setFont(new Font("Bahnschrift", Font.PLAIN, 15));
-		lblNewLabel_2_1_1.setBounds(10, 68, 181, 22);
+		lblNewLabel_2_1_1.setBounds(10, 11, 181, 27);
 		panel_4.add(lblNewLabel_2_1_1);
 
 		table_Sp = new JTable();
@@ -396,25 +615,8 @@ public class BanHangGUI extends JFrame {
 				new String[] { "New column", "New column", "New column", "New column", "New column", "New column" }));
 		table_Sp.addMouseListener(controller);
 		JScrollPane scrollPane_1 = new JScrollPane(table_Sp);
-		scrollPane_1.setBounds(10, 88, 481, 249);
+		scrollPane_1.setBounds(10, 49, 481, 288);
 		panel_4.add(scrollPane_1);
-
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(10, 11, 481, 46);
-		panel_4.add(panel);
-		panel.setLayout(null);
-
-		textField = new JTextField();
-		textField.setBounds(64, 0, 411, 46);
-		panel.add(textField);
-		textField.setColumns(10);
-
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1
-				.setIcon(new ImageIcon("Assets/ImgeIconJava/06-magnify-icon.png"));
-		lblNewLabel_1.setBounds(6, 0, 46, 46);
-		panel.add(lblNewLabel_1);
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 352, 847, 2);
@@ -422,7 +624,7 @@ public class BanHangGUI extends JFrame {
 
 		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(Color.WHITE);
-		panel_5.setBounds(10, 365, 847, 315);
+		panel_5.setBounds(10, 365, 869, 315);
 		panel_2.add(panel_5);
 		panel_5.setLayout(null);
 
@@ -455,10 +657,6 @@ public class BanHangGUI extends JFrame {
 		btnXoa.setIcon(new ImageIcon("Assets/ImgeIconJava/Shopping-basket-remove-icon.png"));
 		btnXoa.setBounds(682, 260, 116, 44);
 		panel_5.add(btnXoa);
-//
-//		JButton btnChiTitPhiu = new JButton("Chi tiết bán hàng");
-//		btnChiTitPhiu.setBounds(714, 273, 123, 31);
-//		panel_5.add(btnChiTitPhiu);
 
 		JLabel lblNhnVin = new JLabel("Nhân viên");
 		lblNhnVin.setBounds(420, 206, 102, 28);
@@ -471,7 +669,7 @@ public class BanHangGUI extends JFrame {
 		comboBox_NhanVien.setEditable(true);
 
 		comboBox_KH = new JComboBox();
-		comboBox_KH.setBounds(532, 161, 305, 28);
+		comboBox_KH.setBounds(532, 161, 279, 28);
 		panel_5.add(comboBox_KH);
 		comboBox_KH.setEditable(true);
 
@@ -499,20 +697,38 @@ public class BanHangGUI extends JFrame {
 		lblNgayNhap.setFont(new Font("Bahnschrift", Font.PLAIN, 15));
 		lblNgayNhap.setBounds(420, 49, 82, 28);
 		panel_5.add(lblNgayNhap);
-		
+
 		dateChooser = new JDateChooser();
 		dateChooser.setBounds(532, 49, 305, 28);
 		panel_5.add(dateChooser);
+		
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ChiTietKhachHang();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton_1.setIcon(new ImageIcon("Assets/ImgeIconJava/category-icon.png"));
+		btnNewButton_1.setFocusable(false);
+		btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setBounds(821, 164, 16, 23);
+		panel_5.add(btnNewButton_1);
 
 		JPanel panel_nhapthongtin = new JPanel();
 		panel_nhapthongtin.setBackground(Color.WHITE);
-		panel_nhapthongtin.setBounds(508, 11, 349, 343);
+		panel_nhapthongtin.setBounds(508, 11, 371, 343);
 		panel_2.add(panel_nhapthongtin);
 		panel_nhapthongtin.setLayout(null);
 
 		JLabel lblNewLabel_2_1_1_1 = new JLabel("Mua hàng");
+		lblNewLabel_2_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2_1_1_1.setFont(new Font("Bahnschrift", Font.PLAIN, 15));
-		lblNewLabel_2_1_1_1.setBounds(133, 6, 82, 22);
+		lblNewLabel_2_1_1_1.setBounds(10, 6, 351, 22);
 		panel_nhapthongtin.add(lblNewLabel_2_1_1_1);
 
 		JLabel lblNewLabel = new JLabel("Mã SP");
@@ -548,7 +764,6 @@ public class BanHangGUI extends JFrame {
 		lblSLng.setBounds(6, 264, 82, 14);
 		panel_nhapthongtin.add(lblSLng);
 
-
 		JButton btn_xacNhan_1 = new JButton("Mua");
 		btn_xacNhan_1.setIcon(new ImageIcon("Assets/ImgeIconJava/cart-add-icon.png"));
 		btn_xacNhan_1.addActionListener(controller);
@@ -556,20 +771,25 @@ public class BanHangGUI extends JFrame {
 		panel_nhapthongtin.add(btn_xacNhan_1);
 
 		lblNewLabel_image = new JLabel("");
-		lblNewLabel_image.setBounds(93, 28, 178, 147);
+		lblNewLabel_image.setBounds(10, 28, 351, 147);
 		panel_nhapthongtin.add(lblNewLabel_image);
 		lblNewLabel_image.setHorizontalAlignment(SwingConstants.CENTER);
+
+	}
+	private ImageIcon createImage(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	// lấy thông tin từ nhà cung cấp lên combobox
 	public void nhapThgTinKH() throws Exception {
 		khachHangBUS lx = new khachHangBUS();
-		ArrayList<KhachHangDTO> arr = lx. getList_kh();
+		ArrayList<KhachHangDTO> arr = lx.getList_kh();
 		String[] s = new String[lx.getNumbKH() + 1];
 		s[0] = "--Select--";
 		int i = 1;
 		for (KhachHangDTO dto : arr) {
-			s[i] = dto.getMaKH()+"-"+dto.getTenKH();
+			s[i] = dto.getMaKH() + "-" + dto.getTenKH();
 			i++;
 		}
 		this.comboBox_KH.setModel(new DefaultComboBoxModel<>(s));
@@ -583,11 +803,12 @@ public class BanHangGUI extends JFrame {
 		s[0] = "--Select--";
 		int i = 1;
 		for (NhanVienDTO dto : arr) {
-			s[i] = dto.getMaNV()+"-"+dto.getTenNV();
+			s[i] = dto.getMaNV() + "-" + dto.getTenNV();
 			i++;
 		}
 		this.comboBox_NhanVien.setModel(new DefaultComboBoxModel<>(s));
 	}
+
 	// lấy dữ liệu từ DB vào Jtable
 	private void loadDataIntoJTable() {
 		model = new DefaultTableModel();
@@ -683,47 +904,6 @@ public class BanHangGUI extends JFrame {
 			loadAnh("Assets/Image/" + anh);
 		}
 	}
-//public void populateJTable(){
-//    BanHangDAL mq = new BanHangDAL();
-//    ArrayList<BanHangDTO> list;
-//	try {
-//		list = mq.docDB();
-//		String[] columnName = {"image","maXe","tenXe","soLuong"};
-//	    Object[][] rows = new Object[list.size()][4];
-//	    for(int i = 0; i < list.size(); i++){
-//	    
-//	        rows[i][0] = list.get(i).getMaxe();
-//	        rows[i][1] = list.get(i).getTenxe();
-//	        
-//	      
-//	        if(list.get(i).getMyImage() != null){
-//	            
-//	         ImageIcon Image = new ImageIcon(new ImageIcon(list.get(i).getMyImage()).getImage()
-//	         .getScaledInstance(150, 120,java.awt.Image.SCALE_SMOOTH) );   
-//	            
-//	        rows[i][2] = Image;
-//	        }
-//	        else{
-//	            rows[i][2] = null;
-//	        }
-//	        rows[i][3] = list.get(i).getQuantity();
-//	    }
-//	    BanHangBLL model = new BanHangBLL(rows, columnName);
-//	    table_Sp.setModel(model);
-//	    table_Sp.setRowHeight(120);
-//	    table_Sp.getColumnModel().getColumn(2).setPreferredWidth(150);
-//	 
-//	} catch (Exception e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//    
-//}
-
-//    TheModel model = new TheModel(rows, columnName);
-//    jTable1.setModel(model);
-//    jTable1.setRowHeight(120);
-//    jTable1.getColumnModel().getColumn(4).setPreferredWidth(150);
 
 	// khi chọn nhập dữ liệu sẽ đưa xuống hàng chờ xác nhận thêm vào
 	public void loadDBtoNhap() {
@@ -732,7 +912,7 @@ public class BanHangGUI extends JFrame {
 		int soLuong = 0;
 		soLuong = Integer.parseInt(textField_soLuong.getText());
 		Double giaXe = Double.valueOf(model.getValueAt(row, 2) + "");
-		
+
 		if (row > -1) {
 			String maSP = table_Sp.getValueAt(row, 0) + "";
 			for (int i = 0; i < table_phieuNhap.getRowCount(); i++) {
@@ -776,18 +956,160 @@ public class BanHangGUI extends JFrame {
 		for (int i = 0; i < row; i++) {
 			String maXe = table_phieuNhap.getValueAt(i, 0) + "";
 			String maLoai = table_phieuNhap.getValueAt(i, 2) + "";
-			
+
 			int soLuong = Integer.parseInt(table_phieuNhap.getValueAt(i, 3) + "");
 			double donGia = Double.parseDouble(table_phieuNhap.getValueAt(i, 4) + "");
 			double tongTien = Double.parseDouble(table_phieuNhap.getValueAt(i, 5) + "");
 //			System.out.println(tongTien);
-			ChiTietHoaDonXuat ctpn = new ChiTietHoaDonXuat(maPX,donGia, soLuong, maLoai, maXe, tongTien);
+			ChiTietHoaDonXuat ctpn = new ChiTietHoaDonXuat(maPX, donGia, soLuong, maLoai, maXe, tongTien);
 			dsct.add(ctpn);
 		}
-		
-		XuatPhieuXuatView xuatPhieuNhap = new XuatPhieuXuatView(ngaylap, maPX , KhachHang, nhanVien, dsct);
+
+		XuatPhieuXuatView xuatPhieuNhap = new XuatPhieuXuatView(ngaylap, maPX, KhachHang, nhanVien, dsct);
 		xuatPhieuNhap.setVisible(true);
 		mayBLL.getList_SP();
 		loadDataIntoJTable();
+	}
+	public void refresh() {
+		textField_nameXe.setText("");
+		textField_giaMIN.setText("");
+		textField_giaMAX.setText("");
+		buttonGroup_PK.clearSelection();
+	}
+	public void searchGiaXe() {
+		try {
+			xemayDAO dal = new xemayDAO();
+			loaixeBUS lxBus = new loaixeBUS();
+			String giaMIn = this.textField_giaMIN.getText();
+			String giaMAX = this.textField_giaMAX.getText();	
+			model.setRowCount(0);
+			ArrayList<XeMayDTO> dsxm = dal.searchGiaXe(giaMIn,giaMAX);
+			for (XeMayDTO xm : dsxm) {
+				Vector vec = new Vector();
+				vec.add(xm.getMaXe());
+				vec.add(xm.getTenXe());
+				vec.add(xm.getGiaXe());
+				vec.add(xm.getSoLuong());
+				vec.add(lxBus.getTenLoai(xm.getLoaiXe()));
+				vec.add(xm.getMyImage());
+				model.addRow(vec);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void searchLoaiXe() {
+		try {
+			xemayDAO dal = new xemayDAO();
+			loaixeBUS lxBus = new loaixeBUS();
+			String maLoai = "";
+			Enumeration<AbstractButton> allRadioButton=buttonGroup_PK.getElements();  
+			while(allRadioButton.hasMoreElements())  
+			{  
+			   JRadioButton temp=(JRadioButton)allRadioButton.nextElement();  
+			   if(temp.isSelected())  
+			   {  
+				   maLoai = lxBus.getMaLoai(temp.getText());  
+			   }  
+			}
+			model.setRowCount(0);
+			ArrayList<XeMayDTO> dsxm = dal.searchLoaiXe(maLoai);
+			for (XeMayDTO xm : dsxm) {
+				Vector vec = new Vector();
+				vec.add(xm.getMaXe());
+				vec.add(xm.getTenXe());
+				vec.add(xm.getGiaXe());
+				vec.add(xm.getSoLuong());
+				vec.add(lxBus.getTenLoai(xm.getLoaiXe()));
+				vec.add(xm.getMyImage());
+				model.addRow(vec);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void searchName() {
+		try {
+			xemayDAO dal = new xemayDAO();
+			loaixeBUS lxBus = new loaixeBUS();
+			String name = this.textField_nameXe.getText();
+			model.setRowCount(0);
+			ArrayList<XeMayDTO> dsxm = dal.search(name);
+			for (XeMayDTO xm : dsxm) {
+				Vector vec = new Vector();
+				vec.add(xm.getMaXe());
+				vec.add(xm.getTenXe());
+				vec.add(xm.getGiaXe());
+				vec.add(xm.getSoLuong());
+				vec.add(lxBus.getTenLoai(xm.getLoaiXe()));
+				vec.add(xm.getMyImage());
+				model.addRow(vec);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void search() {
+		try {
+			xemayDAO dal = new xemayDAO();
+			loaixeBUS lxBus = new loaixeBUS();
+			String name = this.textField_nameXe.getText();
+			String giaMIn = this.textField_giaMIN.getText();
+			String giaMAX = this.textField_giaMAX.getText();
+			String maLoai = "";
+			Enumeration<AbstractButton> allRadioButton=buttonGroup_PK.getElements();  
+			while(allRadioButton.hasMoreElements())  
+			{  
+			   JRadioButton temp=(JRadioButton)allRadioButton.nextElement();  
+			   if(temp.isSelected())  
+			   {  
+				   maLoai = lxBus.getMaLoai(temp.getText());  
+			   }  
+			}	
+			model.setRowCount(0);
+			ArrayList<XeMayDTO> dsxm = dal.searchNangCao(name,giaMIn,giaMAX,maLoai);
+			for (XeMayDTO xm : dsxm) {
+				Vector vec = new Vector();
+				vec.add(xm.getMaXe());
+				vec.add(xm.getTenXe());
+				vec.add(xm.getGiaXe());
+				vec.add(xm.getSoLuong());
+				vec.add(lxBus.getTenLoai(xm.getLoaiXe()));
+				vec.add(xm.getMyImage());
+				model.addRow(vec);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void ChiTietKhachHang() {
+		try {
+			KhachHangDAO dao = new KhachHangDAO();
+			String kh = comboBox_KH.getSelectedItem() + "";
+			String[] loaiTmp = kh.split("-");
+			String KhachHang = loaiTmp[0].trim();
+			KhachHangDTO list = dao.selectMaKH(KhachHang);
+			String maKh = list.getMaKH();
+			System.out.println(maKh);
+			String tenKh = list.getTenKH();
+			System.out.println(tenKh);
+			String diaChi = list.getDiaChi();
+			System.out.println(diaChi);
+			int sdt = list.getSDT();
+			System.out.println(sdt);
+			String gioiTinh = list.getGioiTinh();
+			System.out.println(gioiTinh);
+			ChiTietKhachHang chiTietKhachHang = new ChiTietKhachHang(maKh, tenKh, diaChi, sdt, gioiTinh);
+			chiTietKhachHang.show();
+			nhapThgTinKH();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

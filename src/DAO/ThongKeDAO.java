@@ -158,7 +158,6 @@ public class ThongKeDAO {
     				+ "  FROM tbl_phieuxuat AS px INNER JOIN tbl_chitietpx AS ctpx "
     				+ "ON px.maPX =ctpx.maPX "
     				+ "WHERE px.ngayXuat >= " + dateString[0] + " AND px.ngayXuat <= " + dateString[1] + "";
-    		System.out.println(sql);
     		PreparedStatement pre = MySQLConnection.connect.prepareCall(sql);
     		ResultSet resultSet = pre.executeQuery();
     		while (resultSet.next()) {

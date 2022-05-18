@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import com.mysql.cj.jdbc.result.ResultSetMetaData;
 
 public class ConnectUnit {
 	public MySQLConnection connect;
@@ -81,7 +80,6 @@ public class ConnectUnit {
 		return this.connect.excuteQuery(query.toString());
 	}
 
-	// Hàm over load Select giảm OrderBy parameter
 	/**
 	 * Select * From Table Where Condition
 	 * 
@@ -195,19 +193,6 @@ public class ConnectUnit {
 		return result.getMetaData().getColumnCount();
 	}
 
-	// hàm lấy tên cột trong result select từ CSDL
-	public static String[] getColumnName(ResultSet result) throws SQLException {
-		// lấy resultsetMetaDate từ Result
-		ResultSetMetaData rsMetaData = (ResultSetMetaData) result.getMetaData();
-		// lấy số lượng cột trong Result
-		int ColumnCount = rsMetaData.getColumnCount();
-		// khai báo danh sách các cột
-		String[] list = new String[ColumnCount];
-		for (int i = 0; i < ColumnCount; i++) {
-			list[i] = rsMetaData.getColumnName(i);
-		}
-		return list;
-	}
 	// hàm đóng kết nối
 	public void Close() throws Exception {
 		this.connect.Close();

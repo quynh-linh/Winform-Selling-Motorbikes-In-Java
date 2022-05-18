@@ -1,8 +1,6 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -10,12 +8,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -28,8 +24,10 @@ import DAO.xemayDAO;
 
 import javax.swing.UIManager;
 
+@SuppressWarnings("serial")
 public class TrangChuView extends JFrame {
 
+	@SuppressWarnings("unused")
 	private xemayDAO dal;
 	private JPanel contentPane;
 	private JTextField textField_timkiem;
@@ -83,8 +81,8 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_DSsanPham = new JButton("Danh s\u00E1ch s\u1EA3n ph\u1EA9m");
 		btn_DSsanPham.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				String src = e.getActionCommand();
 				xemayGUI View;
 				try {
 					View = new xemayGUI();
@@ -109,6 +107,7 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_DMsanpham = new JButton("Danh m\u1EE5c s\u1EA3n ph\u1EA9m");
 		btn_DMsanpham.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				String src = e.getActionCommand();
 				if (src.equals("Danh mục sản phẩm")) {
@@ -130,6 +129,7 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_DSNhanvien = new JButton("Danh s\u00E1ch nh\u00E2n vi\u00EAn");
 		btn_DSNhanvien.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				nhanvienGUI view = new nhanvienGUI();
 				view.show();
@@ -149,6 +149,7 @@ public class TrangChuView extends JFrame {
 		JButton btn_DSKhachHang = new JButton("Danh s\u00E1ch kh\u00E1ch h\u00E0ng");
 		btn_DSKhachHang.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				KhachHangGUI kh = new KhachHangGUI();
 				kh.show();
@@ -168,6 +169,7 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_HDNhap = new JButton("Danh s\u00E1ch h\u00F3a \u0111\u01A1n nh\u1EADp");
 		btn_HDNhap.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				try {
 					DanhSachPhieuNhap ds = new DanhSachPhieuNhap();
@@ -191,6 +193,7 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_HDXuat = new JButton("Danh s\u00E1ch h\u00F3a \u0111\u01A1n xu\u1EA5t");
 		btn_HDXuat.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				DanhSachPhieuXuat ds;
 				try {
@@ -216,6 +219,7 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_Thongke = new JButton("Th\u1ED1ng k\u00EA s\u1EA3n ph\u1EA9m");
 		btn_Thongke.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				ThongKeGUI gui = new ThongKeGUI();
 				gui.show();
@@ -234,6 +238,7 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_home = new JButton("Trang chủ");
 		btn_home.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				TrangChuView chuView = new TrangChuView();
 				chuView.show();
@@ -252,6 +257,7 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_ncc = new JButton("Danh sách nhà cung cấp");
 		btn_ncc.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				NhaCungCapView view = new NhaCungCapView();
 				view.show();
@@ -270,6 +276,7 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_home_1 = new JButton("Bán hàng");
 		btn_home_1.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				BanHangGUI bh;
 				try {
@@ -295,6 +302,7 @@ public class TrangChuView extends JFrame {
 
 		JButton btn_home_1_1 = new JButton("Nhập hàng");
 		btn_home_1_1.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				PhieuNhapView pn;
 				try {

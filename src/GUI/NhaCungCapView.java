@@ -503,7 +503,7 @@ public class NhaCungCapView extends JFrame {
 		});
 		btnExportExcel.setIcon(new ImageIcon("Assets/ImgeIconJava/Microsoft-Excel-2013-icon.png"));
 		btnExportExcel.setFont(new Font("Arial", Font.PLAIN, 15));
-		btnExportExcel.setBounds(633, 347, 135, 37);
+		btnExportExcel.setBounds(616, 347, 152, 37);
 		panel_5.add(btnExportExcel);
 		loadDataIntoJTable();
 	}

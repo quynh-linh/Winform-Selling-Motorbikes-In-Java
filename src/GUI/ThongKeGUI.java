@@ -26,7 +26,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.CategoryDataset;
@@ -40,6 +39,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JSeparator;
 
 
+@SuppressWarnings("serial")
 public class ThongKeGUI extends JFrame {
 
 	private JPanel contentPane;
@@ -127,8 +127,8 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_DSsanPham = new JButton("Danh s\u00E1ch s\u1EA3n ph\u1EA9m");
 		btn_DSsanPham.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				String src = e.getActionCommand();
 				xemayGUI View;
 				try {
 					View = new xemayGUI();
@@ -153,6 +153,7 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_DMsanpham = new JButton("Danh m\u1EE5c s\u1EA3n ph\u1EA9m");
 		btn_DMsanpham.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				String src = e.getActionCommand();
 				if (src.equals("Danh mục sản phẩm")) {
@@ -174,6 +175,7 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_DSNhanvien = new JButton("Danh s\u00E1ch nh\u00E2n vi\u00EAn");
 		btn_DSNhanvien.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				nhanvienGUI view = new nhanvienGUI();
 				view.show();
@@ -193,6 +195,7 @@ public class ThongKeGUI extends JFrame {
 		JButton btn_DSKhachHang = new JButton("Danh s\u00E1ch kh\u00E1ch h\u00E0ng");
 		btn_DSKhachHang.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				KhachHangGUI kh = new KhachHangGUI();
 				kh.show();
@@ -212,6 +215,7 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_HDNhap = new JButton("Danh s\u00E1ch h\u00F3a \u0111\u01A1n nh\u1EADp");
 		btn_HDNhap.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				try {
 					DanhSachPhieuNhap ds = new DanhSachPhieuNhap();
@@ -235,6 +239,7 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_HDXuat = new JButton("Danh s\u00E1ch h\u00F3a \u0111\u01A1n xu\u1EA5t");
 		btn_HDXuat.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				DanhSachPhieuXuat ds;
 				try {
@@ -260,6 +265,7 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_Thongke = new JButton("Th\u1ED1ng k\u00EA s\u1EA3n ph\u1EA9m");
 		btn_Thongke.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				ThongKeGUI gui = new ThongKeGUI();
 				gui.show();
@@ -278,6 +284,7 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_home = new JButton("Trang chủ");
 		btn_home.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				TrangChuView chuView = new TrangChuView();
 				chuView.show();
@@ -296,6 +303,7 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_ncc = new JButton("Danh sách nhà cung cấp");
 		btn_ncc.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				NhaCungCapView view = new NhaCungCapView();
 				view.show();
@@ -314,6 +322,7 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_home_1 = new JButton("Bán hàng");
 		btn_home_1.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				BanHangGUI bh;
 				try {
@@ -339,6 +348,7 @@ public class ThongKeGUI extends JFrame {
 
 		JButton btn_home_1_1 = new JButton("Nhập hàng");
 		btn_home_1_1.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				PhieuNhapView pn;
 				try {
@@ -468,7 +478,7 @@ public class ThongKeGUI extends JFrame {
 		lblNewLabel_4.setBounds(10, 11, 180, 25);
 		panel_4.add(lblNewLabel_4);
 
-		comboBox_Year = new JComboBox();
+		comboBox_Year = new JComboBox<Integer>();
 		comboBox_Year.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				thongKeTheoQuy();
@@ -851,8 +861,7 @@ public class ThongKeGUI extends JFrame {
 	}
 	
 	private CategoryDataset createDataset() {
-        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset(); 
         String [] i = {"01","02","03","04","05","06","07","08","09","10","11","12"};
         for (String string : i) {
         	double value = thongKeBUS.getDoanhThuThang(string,Calendar.getInstance().get(Calendar.YEAR));

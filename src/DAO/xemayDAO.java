@@ -29,7 +29,6 @@ public class xemayDAO {
 			xemay.setSoLuong(result.getInt("soLuong"));
 			xemay.setLoaiXe(result.getString("loaiXe"));
 			xemay.setImage(result.getString("image"));
-			System.out.println("Image retrieved successfully.");
 			sanphams.add(xemay);
 		}
 		connect.Close();

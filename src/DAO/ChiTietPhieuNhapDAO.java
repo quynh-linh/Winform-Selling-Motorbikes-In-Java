@@ -18,7 +18,7 @@ public class ChiTietPhieuNhapDAO {
         connect = new ConnectUnit();
         ResultSet result = this.connect.Select("tbl_chitietpn", condition, orderBy);
         ArrayList<ChiTietHoaDonNhap> sanphams = new ArrayList<>();
-        while ( result.next() ) {
+        while (result.next() ) {
         	ChiTietHoaDonNhap ct = new ChiTietHoaDonNhap();
         	ct.setDonGia(result.getFloat("donGia"));
         	ct.setTongTien(result.getFloat("tongTien"));
@@ -54,10 +54,6 @@ public class ChiTietPhieuNhapDAO {
     public ArrayList<ChiTietHoaDonNhap> docDB() throws Exception {
         return docDB1(null);
     }
-    /**
-     * Tạo thêm 1 hdách hàng dựa theo đã có thông tin trước
-     * @return true nếu thành công
-     */
     public Boolean them(ChiTietHoaDonNhap hd) throws Exception {
         connect = new ConnectUnit();
         String sqlUpdateSP = "UPDATE tbl_xemay SET soLuong = soLuong + ? WHERE maXe  = ?";
@@ -77,15 +73,4 @@ public class ChiTietPhieuNhapDAO {
         connect.Close();
         return check_them;	
     }
-    /**
-	 * @param hd chuyền vào dữ liệu nhà cung cấp để xóa
-	 * @return true nếu thành công
-	 */
-	/**
-	 * @param hd truyền vào dữ liệu nhà cung cấp mới Sửa thông tin đăng nhập 
-	 * @return true nếu thành công
-	 */
-	public static void main(String[] args) {
-		
-	}
 }

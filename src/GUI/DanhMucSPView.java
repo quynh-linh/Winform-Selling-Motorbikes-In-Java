@@ -463,14 +463,14 @@ public class DanhMucSPView extends JFrame {
 		JButton btn_sua = new JButton("Sửa");
 		btn_sua.setIcon(new ImageIcon("Assets/ImgeIconJava/62968-wrench-icon.png"));
 		btn_sua.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btn_sua.setBounds(255, 429, 136, 41);
+		btn_sua.setBounds(238, 429, 136, 41);
 		btn_sua.addActionListener(controller);
 		panel_5.add(btn_sua);
 
 		JButton btnXoa = new JButton("Xóa");
 		btnXoa.setIcon(new ImageIcon("Assets/ImgeIconJava/Windows-Close-Program-icon.png"));
 		btnXoa.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnXoa.setBounds(449, 429, 136, 41);
+		btnXoa.setBounds(434, 429, 136, 41);
 		panel_5.add(btnXoa);
 		
 		JButton btnExportexcel = new JButton("ExportExcel");
@@ -482,7 +482,7 @@ public class DanhMucSPView extends JFrame {
 		});
 		btnExportexcel.setIcon(new ImageIcon("Assets/ImgeIconJava/Microsoft-Excel-2013-icon.png"));
 		btnExportexcel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnExportexcel.setBounds(652, 430, 136, 41);
+		btnExportexcel.setBounds(635, 430, 153, 41);
 		panel_5.add(btnExportexcel);
 		btnXoa.addActionListener(controller);
 		loadDataIntoJTable();

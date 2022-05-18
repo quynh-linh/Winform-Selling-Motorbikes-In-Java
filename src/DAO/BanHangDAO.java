@@ -19,10 +19,8 @@ public class BanHangDAO {
     public ArrayList<BanHangDTO> docDB(String condition, String orderBy) throws Exception {
         // kết nối CSDL
         connect = new ConnectUnit();
-
         ResultSet result = this.connect.Select("tbl_banhang", condition, orderBy);
-        ArrayList<BanHangDTO> sanphams = new ArrayList<>();
-       
+        ArrayList<BanHangDTO> sanphams = new ArrayList<>(); 
         while ( result.next() ) {
         	BanHangDTO bh = new BanHangDTO();
         	

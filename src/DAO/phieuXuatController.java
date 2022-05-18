@@ -58,10 +58,26 @@ public class phieuXuatController implements ActionListener , MouseListener {
 				e1.printStackTrace();
 			}
 		} else if(src.equals("Search")) {
-			this.view.search();
-			this.view.searchName();
-			this.view.searchGiaXe();
-			this.view.searchLoaiXe();
+			if(this.view.textField_giaMAX.getText().equals("") 
+					&& this.view.textField_giaMIN.getText().equals("") 
+					&& this.view.buttonGroup_PK.isSelected(null)) {
+				this.view.searchName();
+				System.out.println("Name");
+			} else if(this.view.textField_giaMAX.getText().equals("") 
+					&& this.view.textField_giaMIN.getText().equals("") 
+					&& this.view.textField_nameXe.getText().equals("")) {
+				this.view.searchLoaiXe();
+				System.out.println("Loại xe");
+			} else if(this.view.textField_nameXe.getText().equals("")
+					&& this.view.buttonGroup_PK.isSelected(null)) {
+				this.view.searchGiaXe();
+				System.out.println("Giá xe");
+			} else {
+				this.view.search();
+				System.out.println("Cả 3");
+			}
+		} else if(src.equals("Xóa")) {
+			this.view.xoaKhoiHangCHO();
 		}
 		
 	}

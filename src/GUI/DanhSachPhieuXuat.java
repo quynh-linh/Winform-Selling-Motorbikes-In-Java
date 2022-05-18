@@ -522,7 +522,6 @@ public class DanhSachPhieuXuat extends JFrame {
 			e.printStackTrace();
 		}
 	}
-
 	// lấy dữ liệu từ DB vào Jtable
 	private void loadDataIntoJTableChiiet() throws Exception {
 		model_chitiet = new DefaultTableModel();
@@ -568,7 +567,6 @@ public class DanhSachPhieuXuat extends JFrame {
 		String ngayXuat = table_Phieuxuat.getValueAt(i_row_1, 1) + "";
 		String khachHang = table_Phieuxuat.getValueAt(i_row_1, 3) + "";
 		double tongTien = Double.valueOf(table_Phieuxuat.getValueAt(i_row_1, 4) + "");
-
 		// Thông tin chi tiết phiếu nhập;
 		model_chitiet = new DefaultTableModel();
 		int i_row = table_chiTietPX.getRowCount();
@@ -616,7 +614,6 @@ public class DanhSachPhieuXuat extends JFrame {
 			ex.printStackTrace();
 		}
 	}
-	
 	// export file excel
 		public void exportExcel() {
 			try {

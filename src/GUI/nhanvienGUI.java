@@ -581,6 +581,7 @@ public class nhanvienGUI extends JFrame {
 		panel_5.add(comboBox_Search);
 		
 		JButton btn_Xoa_1 = new JButton("Xóa");
+		btn_Xoa_1.addActionListener(controller);
 		btn_Xoa_1.setIcon(new ImageIcon("Assets/ImgeIconJava/cross-icon.png"));
 		btn_Xoa_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btn_Xoa_1.setBounds(455, 332, 143, 34);

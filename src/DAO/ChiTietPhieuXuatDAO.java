@@ -8,7 +8,6 @@ import DTO.ChiTietHoaDonXuat;
 
 public class ChiTietPhieuXuatDAO {
 	ConnectUnit connect;
-
 	/**
 	 * Lấy thông tin từ Database
 	 */
@@ -85,21 +84,4 @@ public class ChiTietPhieuXuatDAO {
 		connect.Close();
 		return check_them;
 	}
-
-	/**
-	 * @param hd chuyền vào dữ liệu nhà cung cấp để xóa
-	 * @return true nếu thành công
-	 */
-	/**
-	 * @param hd truyền vào dữ liệu nhà cung cấp mới Sửa thông tin đăng nhập
-	 * @return true nếu thành công
-	 */
-	public static void main(String[] args) {
-
-	}
-//	public void luuCTPhieuXuat(ChiTietHoaDonXuat ctpn) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
 }

@@ -55,11 +55,6 @@ public class KhachHangDAO {
 		connect.Close();
 		return kh;
 	}
-	/**
-	 * Tạo thêm 1 hdách hàng dựa theo đã có thông tin trước
-	 * 
-	 * @return true nếu thành công
-	 */
 	public Boolean them(KhachHangDTO hd) throws Exception {
 		connect = new ConnectUnit();
 		// tạo đối tượng truyền vào
@@ -74,10 +69,6 @@ public class KhachHangDAO {
 		return check;
 	}
 
-	/**
-	 * @param hd chuyền vào dữ liệu nhà cung cấp để xóa
-	 * @return true nếu thành công
-	 */
 	public Boolean xoa(KhachHangDTO hd) throws Exception {
 		connect = new ConnectUnit();
 		String condition = " maKH  = '" + hd.getMaKH() + "'";
@@ -86,10 +77,6 @@ public class KhachHangDAO {
 		return check;
 	}
 
-	/**
-	 * @param hd truyền vào dữ liệu nhà cung cấp mới Sửa thông tin đăng nhập
-	 * @return true nếu thành công
-	 */
 	public Boolean sua(KhachHangDTO hd) throws Exception {
 		connect = new ConnectUnit();
 		// tạo đối tượng truyền vào
@@ -104,5 +91,4 @@ public class KhachHangDAO {
 		connect.Close();
 		return check;
 	}
-
 }

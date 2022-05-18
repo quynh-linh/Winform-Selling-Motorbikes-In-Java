@@ -62,6 +62,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JToggleButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
@@ -86,11 +87,11 @@ public class BanHangGUI extends JFrame {
 	private xeMayBUS mayBLL = new xeMayBUS();
 	private loaixeBUS lxBll = new loaixeBUS();
 	private JLabel lblNewLabel_image;
-	private JTextField textField_nameXe;
+	public JTextField textField_nameXe;
 	private JDateChooser dateChooser;
-	private JTextField textField_giaMIN;
-	private JTextField textField_giaMAX;
-	private ButtonGroup buttonGroup_PK;
+	public JTextField textField_giaMIN;
+	public JTextField textField_giaMAX;
+	public ButtonGroup buttonGroup_PK;
 
 	/**
 	 * Launch the application.
@@ -654,6 +655,7 @@ public class BanHangGUI extends JFrame {
 		btn_xacNhan.addActionListener(controller);
 
 		JButton btnXoa = new JButton("Xóa");
+		btnXoa.addActionListener(controller);
 		btnXoa.setIcon(new ImageIcon("Assets/ImgeIconJava/Shopping-basket-remove-icon.png"));
 		btnXoa.setBounds(682, 260, 116, 44);
 		panel_5.add(btnXoa);
@@ -975,6 +977,7 @@ public class BanHangGUI extends JFrame {
 		textField_giaMIN.setText("");
 		textField_giaMAX.setText("");
 		buttonGroup_PK.clearSelection();
+		loadDataIntoJTable();
 	}
 	public void searchGiaXe() {
 		try {
@@ -1109,7 +1112,14 @@ public class BanHangGUI extends JFrame {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}	
+	}
+	public void xoaKhoiHangCHO() {
+		model_choxn = (DefaultTableModel) table_phieuNhap.getModel();
+		int i_row = table_phieuNhap.getSelectedRow();
+		int luaChon = JOptionPane.showConfirmDialog(this, "Bạn có chắn chắn xóa dòng đã chọn?");
+		if (luaChon == JOptionPane.YES_OPTION) {
+			model_choxn.removeRow(i_row);
 		}
-		
 	}
 }

@@ -63,6 +63,7 @@ import DTO.MyFileChoose;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class xemayGUI extends JFrame {
 
 	private JPanel contentPane;

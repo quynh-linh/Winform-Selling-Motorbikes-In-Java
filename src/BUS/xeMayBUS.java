@@ -120,8 +120,8 @@ public class xeMayBUS {
 			String image) {
 
 		try {
-//			String[] loaiTmp = loaiXe.split(" - ");
-//			String maLoai = loaiTmp[0];
+			String[] loaiTmp = loaiXe.split(" - ");
+			String maLoai = loaiTmp[0];
 			double gia = Double.valueOf(giaXe);
 			int sl = Integer.valueOf(soLuong);
 //			donGia = donGia.replace(",", "");
@@ -131,6 +131,8 @@ public class xeMayBUS {
 			sp.setGiaXe(gia);
 			sp.setImage(image);
 			sp.setSoLuong(sl);
+			sp.setLoaiXe(maLoai);
+			System.out.println(sp);
 			xmDAL.nhapSanPhamTuExcel(sp);
 		} catch (Exception e) {
 		}

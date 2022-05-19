@@ -102,7 +102,6 @@ public class xemayGUI extends JFrame {
 	public xemayGUI() throws Exception {
 		this.init();
 		nhapThongTin_LoaiXe();
-		nhapThongTin_NCC();
 		loadDataIntoJTable();
 	}
 
@@ -636,19 +635,6 @@ public class xemayGUI extends JFrame {
 		comboBox_Loaixe.setModel(new DefaultComboBoxModel<>(s));
 	}
 
-	// lấy thông tin từ nhà cung cấp lên combobox
-	public void nhapThongTin_NCC() throws Exception {
-		NhaCungCapBUS lx = new NhaCungCapBUS();
-		ArrayList<NhaCungCap> arr = lx.getList_NCC();
-		String[] s = new String[lx.getNumbNCC() + 1];
-		s[0] = "--Select--";
-		int i = 1;
-		for (NhaCungCap dto : arr) {
-			s[i] = dto.getMaNhaCC() + "-" + dto.getTenNhaCC();
-			i++;
-		}
-	}
-
 	// lấy dữ liệu từ DB vào Jtable
 	private void loadDataIntoJTable() {
 		model = new DefaultTableModel();
@@ -763,6 +749,7 @@ public class xemayGUI extends JFrame {
 
 	public void xoaForm() {
 		this.textField_Maxe.setText("");
+		this.textField_Maxe.setEditable(true);
 		this.textField_Tenxe.setText("");
 		this.textField_Gia.setText("");
 		this.textField_soLuong.setText("");
@@ -1022,22 +1009,19 @@ public class xemayGUI extends JFrame {
 	public void nhapExcel(JTable tbl) {
 		try {
 			TableModel dtm = tbl.getModel();
-
 			JFileChooser chooser = new JFileChooser("Excel/importdsxm.xlsx");
 			chooser.setDialogTitle("Chọn file");
 			FileNameExtensionFilter fnef = new FileNameExtensionFilter("Excel Files", "xls", "xlsx", "xlsm");
 			chooser.setFileFilter(fnef);
-
 			if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 				File fileSelected = chooser.getSelectedFile();
 				FileInputStream fis = new FileInputStream(fileSelected);
 				BufferedInputStream bis = new BufferedInputStream(fis);
-
 				XSSFWorkbook wb = new XSSFWorkbook(bis);
 				Sheet sheet = wb.getSheetAt(0);
 				DefaultTableModel dtmtbl = (DefaultTableModel) dtm;
 				dtmtbl.setRowCount(0);
-				for (int i = 4; i <= sheet.getLastRowNum(); i++) {
+				for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 					Row row = sheet.getRow(i);
 					Vector vec = new Vector();
 					for (int j = 0; j < row.getLastCellNum(); j++) {

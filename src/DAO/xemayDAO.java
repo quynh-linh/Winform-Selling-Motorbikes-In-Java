@@ -276,19 +276,21 @@ public class xemayDAO {
 
 	public boolean nhapSanPhamTuExcel(XeMayDTO sp) {
 		try {
-			String sql = "DELETE * FROM tbl_xemay; "
-					+ "INSERT INTO tbl_xemay(maXe, tenXe, giaXe, soLuong, loaiXe, image) "
-					+ "VALUES (?, ?, ?, ?, ?, ?)";
-			PreparedStatement pre = MySQLConnection.connect.prepareStatement(sql);
-			pre.setString(1, sp.getMaXe());
-			pre.setString(2, sp.getTenXe());
-			pre.setDouble(3, sp.getGiaXe());
-			pre.setInt(4, sp.getSoLuong());
-			pre.setString(5, sp.getLoaiXe());
-			pre.setString(6, sp.getMyImage());
-			pre.execute();
+			String condition = " maXe  = '" + sp.getMaXe() + "'";
+			Boolean check1 = connect.Delete("tbl_xemay", condition);
+			HashMap<String, Object> insertValues = new HashMap<>();
+			insertValues.put("maXe", sp.getMaXe());
+			insertValues.put("tenXe", sp.getTenXe());
+			insertValues.put("giaXe", sp.getGiaXe());
+			insertValues.put("soLuong", sp.getSoLuong());
+			insertValues.put("loaiXe", sp.getLoaiXe());
+			insertValues.put("image", sp.getMyImage());
+			Boolean check2 = connect.Insert("tbl_xemay", insertValues);
 			return true;
 		} catch (SQLException e) {
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return false;
 	}

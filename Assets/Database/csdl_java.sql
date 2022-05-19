@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 18, 2022 lúc 06:58 PM
+-- Thời gian đã tạo: Th5 19, 2022 lúc 04:42 AM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 7.4.28
 
@@ -70,17 +70,6 @@ CREATE TABLE `tbl_chitietpx` (
   `tongTien` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Đang đổ dữ liệu cho bảng `tbl_chitietpx`
---
-
-INSERT INTO `tbl_chitietpx` (`maPX`, `donGia`, `soLuong`, `maLoai`, `maXe`, `tongTien`) VALUES
-('M1', 72000, 1, 'M1 - 50cc', 'HI1', 72000),
-('M2', 72000, 1, 'M1 - 50cc', 'HI1', 72000),
-('M2', 23400, 2, 'M3 - 125cc', 'VT5', 46800),
-('M4', 12000, 10, 'M6 - 175cc', 'QE7', 120000),
-('OP1', 80000, 1, 'M4 - 150cc', 'KI5', 80000);
-
 -- --------------------------------------------------------
 
 --
@@ -101,6 +90,7 @@ CREATE TABLE `tbl_khachhang` (
 
 INSERT INTO `tbl_khachhang` (`maKH`, `tenKH`, `diaChi`, `SDT`, `gioiTinh`) VALUES
 ('KOl1', 'Quỳnh', 'Gia Lai', 981984623, 'Nam'),
+('LP0', 'Khánh', 'Sài Gòn', 981984623, 'Nữ'),
 ('M3', 'Khánh Linh', 'Đà Nẵng', 981984623, 'Nữ');
 
 -- --------------------------------------------------------
@@ -225,9 +215,7 @@ CREATE TABLE `tbl_phieuxuat` (
 
 INSERT INTO `tbl_phieuxuat` (`maPX`, `ngayXuat`, `maKH`, `maNV`, `tongTien`) VALUES
 ('M1', '2022-02-18', 'KOl1', 'M2', 72000),
-('M2', '2022-07-18', 'M3', 'C1', 118800),
-('M4', '2022-04-18', 'KOl1', 'C1', 120000),
-('OP1', '2022-11-17', 'KOl1', 'M2', 80000);
+('M2', '2022-07-18', 'M3', 'C1', 118800);
 
 -- --------------------------------------------------------
 

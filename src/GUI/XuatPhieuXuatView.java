@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -141,14 +142,13 @@ public class XuatPhieuXuatView extends JFrame {
 		DecimalFormat dcf = new DecimalFormat("###,### VND");
 
 		PhieuXuatBUS pnBll = new PhieuXuatBUS();
-		pnBll.themPhieuXuat(maPX, ngayXuat, khachHang, nhanVien, tongTien);
-	
-
+		JOptionPane.showMessageDialog(this, pnBll.themPhieuXuat(maPX, ngayXuat, khachHang, nhanVien, tongTien));
 		ChiTietPhieuXuatBUS ctBll = new ChiTietPhieuXuatBUS();
 		String hd = "<style> " + "table {" + "border: 1px solid;" + "border-bottom: none" + "}" + "tr {"
 				+ "border-bottom: 1px solid;" + "}" + "td {" + "padding: 8px;" + "} " + "th {" + "font-size:16pt" + "}"
 				+ "</style>";
 		hd += "<h1 style='text-align:center;'>CHI TIẾT PHIẾU NHẬP</h1>";
+		hd += "	TÊN CỬA HÀNG: 2 THÀNH VIÊN  <br/>";
 		hd += "Nhân viên: " + nhanVien + "<br/>";
 		hd += "Ngày xuất: " + ngayXuat + "<br/>";
 		hd += "Khách : " + khachHang + "<br/>";

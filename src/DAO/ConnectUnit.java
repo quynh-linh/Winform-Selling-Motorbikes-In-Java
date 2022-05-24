@@ -136,7 +136,6 @@ public class ConnectUnit {
 		StringBuilder query = new StringBuilder("Insert Into " + TableName);
 		// khai báo biến StringBuilder để tạo chuỗi Column Values
 		StringBuilder valueInsert = new StringBuilder();
-
 		query.append("(");
 		// Duyệt và đưa thông tin tên cột và giá tri values vào
 		for (String key : ColumnValues.keySet()) {

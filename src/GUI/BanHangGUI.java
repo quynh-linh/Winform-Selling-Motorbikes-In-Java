@@ -50,6 +50,7 @@ import javax.swing.table.DefaultTableModel;
 import BUS.khachHangBUS;
 import BUS.loaixeBUS;
 import BUS.NhanVienBUS;
+import BUS.PhieuXuatBUS;
 import BUS.xeMayBUS;
 import DAO.KhachHangDAO;
 import DAO.phieuXuatController;
@@ -942,6 +943,7 @@ public class BanHangGUI extends JFrame {
 	}
 
 	public void xacnhanNhap() throws Exception {
+		PhieuXuatBUS pxBUS = new PhieuXuatBUS();
 		int row = table_phieuNhap.getRowCount();
 		String kh = comboBox_KH.getSelectedItem() + "";
 		String[] loaiTmp = kh.split("-");
@@ -952,6 +954,7 @@ public class BanHangGUI extends JFrame {
 		String nhanVien = loaiTmp_1[0].trim();
 		//
 		String maPX = textField_maPX.getText();
+//		JOptionPane.showConfirmDialog(this, pxBUS.kiemTraKhoachinh1(mxPX));)
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String ngaylap = sdf.format(dateChooser.getDate());
 		ArrayList<ChiTietHoaDonXuat> dsct = new ArrayList<>();

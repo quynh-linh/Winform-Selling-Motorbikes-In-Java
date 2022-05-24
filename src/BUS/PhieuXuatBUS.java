@@ -34,12 +34,20 @@ public class PhieuXuatBUS {
 		for (HoaDonXuat nhanvien : list_hdn) {
 			if (nhanvien.getMaPX().equals(hd.getMaNV() + "")) {
 				System.out.println("Bị trùng");
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
-
+	public String kiemTraKhoachinh1(HoaDonXuat hd) {
+		for (HoaDonXuat nhanvien : list_hdn) {
+			if (nhanvien.getMaPX().equals(hd.getMaNV() + "")) {
+				System.out.println("Bị trùng");
+				return "Trùng mã phiếu xuất";
+			}
+		}
+		return "Không trùng mã phiếu xuất";
+	}
 	public int getNumbPN() {
 		return list_hdn.size();
 	}
@@ -50,14 +58,20 @@ public class PhieuXuatBUS {
 	 * @return true nếu thành công
 	 * @throws Exception 
 	 */
-	public boolean themPhieuXuat(String maPX , String ngayXuat , String khachHang, String nhanVien, double tongTien) throws Exception {
-        HoaDonXuat pn = new HoaDonXuat();
+	public String themPhieuXuat(String maPX , String ngayXuat , String khachHang, String nhanVien, double tongTien) throws Exception {
+		HoaDonXuat pn = new HoaDonXuat();
         pn.setMaPX(maPX);
         pn.setNgayXuat(ngayXuat);
         pn.setMaKH(khachHang);
         pn.setMaNV(nhanVien);
         pn.setTongTien(tongTien);
-        return pnDAL.them(pn);
+        if(!kiemTraKhoachinh(pn)) {
+        	pnDAL.them(pn);
+        	return "Thêm phiếu xuất thành công" ;
+        } else {
+        	return "Bị trùng mã phiếu xuất";
+        }
+//        return "NUll";
     }
 	public String xoa(HoaDonXuat hd) throws Exception {
 		if (pnDAL.xoa(hd)) {

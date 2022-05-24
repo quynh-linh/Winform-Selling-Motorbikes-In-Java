@@ -276,8 +276,10 @@ public class xemayDAO {
 
 	public boolean nhapSanPhamTuExcel(XeMayDTO sp) {
 		try {
+			// xóa dữ liệu trước khi nhập từ file excel
 			String condition = " maXe  = '" + sp.getMaXe() + "'";
 			Boolean check1 = connect.Delete("tbl_xemay", condition);
+			// sau khi xóa sẽ thêm dữ liệu từ file excel vào CSDL
 			HashMap<String, Object> insertValues = new HashMap<>();
 			insertValues.put("maXe", sp.getMaXe());
 			insertValues.put("tenXe", sp.getTenXe());

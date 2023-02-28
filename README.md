@@ -10,7 +10,7 @@ Therefore, it is necessary to apply information technology to perform the job ea
 ## Tech Stack Used:
 ```bash
 Language:
-	* Java
+    * Java
 Database:
     * MySql
 ```
@@ -58,3 +58,6 @@ Customer                   |                   Statistical
 Chart                   |
 :---------------------------------:        |
 <img src="./Assets/Screenshots/Chart.png" height="400">  |
+
+### Make sure to star the repository if you find it helpful!
+<a href="https://github.com/Quynh-Linh-IT/Winform-Selling-Motorbikes-In-Java/stargazers"><img src="https://img.shields.io/github/stars/Quynh-Linh-IT/Winform-Selling-Motorbikes-In-Java?color=yellow" alt="Stars Badge"/></a>

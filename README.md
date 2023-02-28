@@ -36,18 +36,25 @@ Add to remove products (can import/export data from Excel file)
 ```
 ## [Project Demo Link](https://www.youtube.com/watch?v=fe7uRrCEjwE)
 ## Some features of the site:
-Home Page                   |                   Registration Page
+Login                    |                   Home
 :---------------------------------:        |      :------------------------------:
-<img src="Screenshots/HomePage.png" height="200">  | <img src="Screenshots/RegistrtionPage.png" height="200">
+<img src="./Assets/Screenshots/Login.png" height="200">  | <img src="./Assets/Screenshots/Home.png" height="200">
 
-Login Page                   |                   Description Product Page
+Sales                   |                   Import Product
 :---------------------------------:        |      :------------------------------:
-<img src="Screenshots/LoginPage.png" height="200">  | <img src="Screenshots/DesProduct.png" height="200">
+<img src="./Assets/Screenshots/Sale.png" height="200">  | <img src="./Assets/Screenshots/Import.png" height="200">
 
-Cart Page                   |                   Order Management Page
+Product                   |                   Category
 :---------------------------------:        |      :------------------------------:
-<img src="Screenshots/CartPage.png" height="200">  | <img src="Screenshots/OderPage.png" height="200">
+<img src="./Assets/Screenshots/Product.png" height="200">  | <img src="./Assets/Screenshots/Category.png" height="200">
 
-Admin Page                   |                   Revenue Statistics page
+Brand                   |                   Staff
 :---------------------------------:        |      :------------------------------:
-<img src="Screenshots/AdminPage.png" height="200">  | <img src="Screenshots/Statistics.png" height="200">
+<img src="./Assets/Screenshots/Brand.png" height="200">  | <img src="./Assets/Screenshots/Staff.png" height="200">
+Customer                   |                   Statistical
+:---------------------------------:        |      :------------------------------:
+<img src="./Assets/Screenshots/Customer.png" height="200">  | <img src="./Assets/Screenshots/Statistical.png" height="200">
+
+Chart                   |
+:---------------------------------:        |
+<img src="./Assets/Screenshots/Chart.png" height="200">  |

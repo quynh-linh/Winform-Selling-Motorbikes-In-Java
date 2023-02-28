@@ -748,13 +748,19 @@ public class xemayGUI extends JFrame {
 	}
 
 	public void xoaForm() {
-		this.textField_Maxe.setText("");
-		this.textField_Maxe.setEditable(true);
-		this.textField_Tenxe.setText("");
-		this.textField_Gia.setText("");
-		this.textField_soLuong.setText("");
-		this.comboBox_Loaixe.setSelectedIndex(0);
-		loadAnh("");
+		try {
+			xeMayBUS list_xemay = new xeMayBUS();
+			String kq = String.valueOf(list_xemay.tongsoluong());
+			this.textField_Maxe.setText("");
+			this.textField_Maxe.setEditable(true);
+			this.textField_Tenxe.setText("");
+			this.textField_Gia.setText("");
+			this.textField_soLuong.setText(kq);
+			this.comboBox_Loaixe.setSelectedIndex(0);
+			loadAnh("");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// thêm xe máy vào table và dB

@@ -91,7 +91,6 @@ public class loaixeDAO {
 		// tạo đối tượng truyền vào
 		HashMap<String, Object> insertValues = new HashMap<>();
 		insertValues.put("tenLoai", hd.getTenLoai());
-		System.out.println(hd.toString());
 		String condition = " maLoai  = '" + hd.getMaLoai() + "'";
 		Boolean check = connect.Update("tbl_loaixe", insertValues, condition);
 		connect.Close();

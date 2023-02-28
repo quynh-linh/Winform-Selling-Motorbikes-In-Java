@@ -56,7 +56,7 @@ public class xeMayBUS {
 	 */
 	public String them(XeMayDTO hd) throws Exception {
 		if (!kiemTraKhoachinh(hd)) {
-			if (xmDAL.them(hd)) {
+			if (xmDAL.themCach2(hd)) {
 				list_xm.add(hd);
 				System.out.println("thêm sản phẩm");
 				return "Thêm thành công";
@@ -64,7 +64,13 @@ public class xeMayBUS {
 		}
 		return "Thêm không thành công";
 	}
-
+	public float tongsoluong() throws Exception {
+		float tong = 0 ;
+		for (XeMayDTO loai : list_xm) {
+			tong += loai.getSoLuong();
+		}
+		return tong;
+	}
 	public String themEcxel(ArrayList<XeMayDTO> hd) throws Exception {
 		for (XeMayDTO xeMayDTO : hd) {
 			if (xmDAL.themEcxel(hd)) {

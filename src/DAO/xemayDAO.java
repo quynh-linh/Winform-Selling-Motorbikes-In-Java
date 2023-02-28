@@ -13,9 +13,6 @@ public class xemayDAO {
 	ConnectUnit connect;
 	FileOutputStream fs = null;
 
-	/**
-	 * Lấy thông tin từ Database
-	 */
 	public ArrayList<XeMayDTO> docDB(String condition, String orderBy) throws Exception {
 		// kết nối CSDL
 		connect = new ConnectUnit();
@@ -43,11 +40,6 @@ public class xemayDAO {
 		return docDB(null);
 	}
 
-	/**
-	 * Tạo thêm 1 hdách hàng dựa theo đã có thông tin trước
-	 * 
-	 * @return true nếu thành công
-	 */
 	public Boolean them(XeMayDTO hd) throws Exception {
 		connect = new ConnectUnit();
 		// tạo đối tượng truyền vào
@@ -61,6 +53,37 @@ public class xemayDAO {
 		Boolean check = connect.Insert("tbl_xemay", insertValues);
 		connect.Close();
 		return check;
+	}
+	public Boolean themCach2(XeMayDTO hd) throws Exception {
+		try {
+			String sql = "INSERT INTO `tbl_xemay`(`maXe`, `tenXe`, `giaXe`, `soLuong`, `loaiXe`, `image`) "
+					+ "VALUES (?,?,?,?,?,?)";
+			PreparedStatement pre = MySQLConnection.connect.prepareStatement(sql);
+			pre.setString(1, hd.getMaXe());
+			pre.setString(2, hd.getTenXe());
+			pre.setDouble(3, hd.getGiaXe());
+			pre.setInt(4, hd.getSoLuong());
+			pre.setString(5, hd.getLoaiXe());
+			pre.setString(6, hd.getMyImage());
+			pre.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public String xoaChiTieu(String maNV) {
+		try {
+			String sql = "DELETE FROM `tbl_chitueu` WHERE maNV ='" + maNV + "'";
+			System.out.println(sql);
+			PreparedStatement pre = MySQLConnection.connect.prepareStatement(sql);
+			pre.executeUpdate();
+			return "Xóa thành công";
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Xóa không thành công";
 	}
 
 	// them excel

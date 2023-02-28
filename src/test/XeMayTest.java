@@ -1,6 +1,5 @@
 package test;
 
-
 import javax.swing.UIManager;
 import GUI.loginView;
 

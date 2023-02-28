@@ -2,6 +2,7 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,7 +35,7 @@ public class MySQLConnection {
 
 	@SuppressWarnings("static-access")
 	protected Connection getConnect() throws Exception {
-//        nếu connection null thì khởi tạo mới
+//        nếu connection null thì khởi to mới
 		if (this.connect == null) {
 //            kiểm tra Driver
 			driveTest();
@@ -54,7 +55,7 @@ public class MySQLConnection {
 	}
 
 //    tạo statement để thực thi Queury
-	protected Statement getStatement() throws Exception {
+	public Statement getStatement() throws Exception {
 //        kiểm tra stament đã đóng chưa
 		if (this.statement == null) {
 //            khởi tạo statement mới

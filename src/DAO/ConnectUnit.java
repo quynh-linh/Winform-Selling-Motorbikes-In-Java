@@ -2,81 +2,82 @@ package DAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 
 
 public class ConnectUnit {
-	public MySQLConnection connect;
+	public static MySQLConnection connect;
 
 	public static void main(String[] args) {
 
 		new ConnectUnit();
 	}
 
-	// hàm khởi tạo kết nối mặc định
+	// hÃ m khá»Ÿi táº¡o káº¿t ná»‘i máº·c Ä‘á»‹nh
 	public ConnectUnit() {
 		connect = new MySQLConnection("localhost", "root", "", "csdl_java");
 	}
 
-	// hàm khởi tạo cơ bản
+	// hÃ m khá»Ÿi táº¡o cÆ¡ báº£n
 	public ConnectUnit(String Host, String Username, String Password, String Database) {
 		connect = new MySQLConnection(Host, Username, Password, Database);
 	}
 
-	// Hàm hỗ trợ Select CSDL
+	// HÃ m há»— trá»£ Select CSDL
 	/**
 	 * Select * From Table Where Condition Order by OderBy
 	 * 
 	 * @throws Exception
 	 */
 	public ResultSet Select(String TableName, String Condition, String OrderBy) throws Exception {
-		// khai báo biến StringBuilder để tạo chuỗi Select
+		// khai bÃ¡o biáº¿n StringBuilder Ä‘á»ƒ táº¡o chuá»—i Select
 		StringBuilder query = new StringBuilder("SELECT * FROM " + TableName);
-		// Đưa câu lệnh điều kiện vaò câu query
+		// Ä�Æ°a cÃ¢u lá»‡nh Ä‘iá»�u kiá»‡n vaÃ² cÃ¢u query
 		this.AddCondition(query, Condition);
-		// Đưa câu lệnh Order vào query
+		// Ä�Æ°a cÃ¢u lá»‡nh Order vÃ o query
 		this.AddOrderBy(query, OrderBy);
-		// chèn ký tự ; vào cuồi các câu lệnh
+		// chÃ¨n kÃ½ tá»± ; vÃ o cuá»“i cÃ¡c cÃ¢u lá»‡nh
 		query.append(";");
-		// thực thi câu lệnh query và trả kết quả
+		// thá»±c thi cÃ¢u lá»‡nh query vÃ  tráº£ káº¿t quáº£
 		return this.connect.excuteQuery(query.toString());
 	}
 	public ResultSet SelectSum(String TableName, String Condition, String OrderBy) throws Exception {
-		// khai báo biến StringBuilder để tạo chuỗi Select
+		// khai bÃ¡o biáº¿n StringBuilder Ä‘á»ƒ táº¡o chuá»—i Select
 		StringBuilder query = new StringBuilder("SELECT SUM("+Condition+")FROM " + TableName);
 		
-		// Đưa câu lệnh điều kiện vaò câu query
+		// Ä�Æ°a cÃ¢u lá»‡nh Ä‘iá»�u kiá»‡n vaÃ² cÃ¢u query
 		this.AddCondition(query, Condition);
-		// Đưa câu lệnh Order vào query
+		// Ä�Æ°a cÃ¢u lá»‡nh Order vÃ o query
 		this.AddOrderBy(query, OrderBy);
-		// chèn ký tự ; vào cuồi các câu lệnh
+		// chÃ¨n kÃ½ tá»± ; vÃ o cuá»“i cÃ¡c cÃ¢u lá»‡nh
 		query.append(";");
 		System.out.println(query);
-		// thực thi câu lệnh query và trả kết quả
+		// thá»±c thi cÃ¢u lá»‡nh query vÃ  tráº£ káº¿t quáº£
 		return this.connect.excuteQuery(query.toString());
 	}
 	public ResultSet SelectSumDoanhThu(String TableName,String OrderBy ,String Condition) throws Exception {
-		// khai báo biến StringBuilder để tạo chuỗi Select
+		// khai bÃ¡o biáº¿n StringBuilder Ä‘á»ƒ táº¡o chuá»—i Select
 		StringBuilder query = new StringBuilder("SELECT SUM("+OrderBy+")FROM " + TableName);
-		// Đưa câu lệnh điều kiện vaò câu query
+		// Ä�Æ°a cÃ¢u lá»‡nh Ä‘iá»�u kiá»‡n vaÃ² cÃ¢u query
 		this.AddCondition(query, Condition);
 		query.append(";");
 		System.out.println(query);
-		// thực thi câu lệnh query và trả kết quả
+		// thá»±c thi cÃ¢u lá»‡nh query vÃ  tráº£ káº¿t quáº£
 		return this.connect.excuteQuery(query.toString());
 	}
 	public ResultSet SelectCount(String TableName, String Condition, String OrderBy) throws Exception {
-		// khai báo biến StringBuilder để tạo chuỗi Select
+		// khai bÃ¡o biáº¿n StringBuilder Ä‘á»ƒ táº¡o chuá»—i Select
 		StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM " + TableName);
 
-		// Đưa câu lệnh điều kiện vaò câu query
+		// Ä�Æ°a cÃ¢u lá»‡nh Ä‘iá»�u kiá»‡n vaÃ² cÃ¢u query
 		this.AddCondition(query, Condition);
-		// Đưa câu lệnh Order vào query
+		// Ä�Æ°a cÃ¢u lá»‡nh Order vÃ o query
 		this.AddOrderBy(query, OrderBy);
-		// chèn ký tự ; vào cuồi các câu lệnh
+		// chÃ¨n kÃ½ tá»± ; vÃ o cuá»“i cÃ¡c cÃ¢u lá»‡nh
 		query.append(";");
 		System.out.println(query);
-		// thực thi câu lệnh query và trả kết quả
+		// thá»±c thi cÃ¢u lá»‡nh query vÃ  tráº£ káº¿t quáº£
 		return this.connect.excuteQuery(query.toString());
 	}
 
@@ -105,7 +106,7 @@ public class ConnectUnit {
 	public ResultSet SelectOrderBY(String TableName, String OrderBy) throws Exception {
 		return this.Select(TableName, null, OrderBy);
 	}
-	// Hàm over load Select giảm Condition parameter
+	// HÃ m over load Select giáº£m Condition parameter
 	/**
 	 * Select * From Table
 	 * 
@@ -115,85 +116,86 @@ public class ConnectUnit {
 		return this.Select(TableName, null, null);
 	}
 
-	// Hàm thêm điều kiện vào query
+	// HÃ m thÃªm Ä‘iá»�u kiá»‡n vÃ o query
 	private void AddCondition(StringBuilder query, String Condition) {
-		// kiểm tra nếu condition khác null
+		// kiá»ƒm tra náº¿u condition khÃ¡c null
 		if (Condition != null) {
 			query.append(" WHERE " + Condition);
 		}
 	}
-	// Hàm thêm OrderBy vào query
+	// HÃ m thÃªm OrderBy vÃ o query
 	private void AddOrderBy(StringBuilder query, String OrderBy) {
-		// Kiểm tra OrderBy Khác null
+		// Kiá»ƒm tra OrderBy KhÃ¡c null
 		if (OrderBy != null) {
 			query.append(" ORDER BY " + OrderBy);
 		}
 	}
 
-	// Hàm hỗ trợ Insert xuống SQL
+	// HÃ m há»— trá»£ Insert xuá»‘ng SQL
 	public boolean Insert(String TableName, HashMap<String, Object> ColumnValues) throws Exception {
-		// Khai báo biến StringBuilder để tạo chuỗi Select
+		// Khai bÃ¡o biáº¿n StringBuilder Ä‘á»ƒ táº¡o chuá»—i Select
 		StringBuilder query = new StringBuilder("Insert Into " + TableName);
-		// khai báo biến StringBuilder để tạo chuỗi Column Values
+		// khai bÃ¡o biáº¿n StringBuilder Ä‘á»ƒ táº¡o chuá»—i Column Values
 		StringBuilder valueInsert = new StringBuilder();
 		query.append("(");
-		// Duyệt và đưa thông tin tên cột và giá tri values vào
+		// Duyá»‡t vÃ  Ä‘Æ°a thÃ´ng tin tÃªn cá»™t vÃ  giÃ¡ tri values vÃ o
 		for (String key : ColumnValues.keySet()) {
 			query.append(key + ",");
 			valueInsert.append("'" + ColumnValues.get(key).toString() + "',");
 		}
-		// cắt bỏ dấu , dư thừa
+		// cáº¯t bá»� dáº¥u , dÆ° thá»«a
 		query = query.delete(query.length() - 1, query.length());
 		valueInsert = valueInsert.delete(valueInsert.length() - 1, valueInsert.length());
 
-		// đưa giá trị của cột vào câu query
+		// Ä‘Æ°a giÃ¡ trá»‹ cá»§a cá»™t vÃ o cÃ¢u query
 		query.append(") Values(" + valueInsert.toString() + ")");
-		// chèn ký tự ; vào cuối dòng lệnh để cách câu
+		// chÃ¨n kÃ½ tá»± ; vÃ o cuá»‘i dÃ²ng lá»‡nh Ä‘á»ƒ cÃ¡ch cÃ¢u
 		query.append(";");
 		System.out.println(query);
-		// Thực thi câu query và trả kết quả ra ngoài
+		// Thá»±c thi cÃ¢u query vÃ  tráº£ káº¿t quáº£ ra ngoÃ i
 		return this.connect.executeUpdate(query.toString()) > 0;
 	}
 
-	// hàm hỗ trợ update CSDL
+	// hÃ m há»— trá»£ update CSDL
 	public boolean Update(String TableName, HashMap<String, Object> ColumnValues, String Condition) throws Exception {
-		// khai báo biến StringBuilder để tạo chuỗi CSDL
+		// khai bÃ¡o biáº¿n StringBuilder Ä‘á»ƒ táº¡o chuá»—i CSDL
 		StringBuilder query = new StringBuilder("Update " + TableName + " Set ");
 
-		// Duyệt và đưa thông tin tên cột, giá trị
+		// Duyá»‡t vÃ  Ä‘Æ°a thÃ´ng tin tÃªn cá»™t, giÃ¡ trá»‹
 		for (String key : ColumnValues.keySet()) {
 			query.append(key + " = '" + ColumnValues.get(key).toString() + "',");
 		}
-		// Cat981 bớt ký tự , cuối câu
+		// Cat981 bá»›t kÃ½ tá»± , cuá»‘i cÃ¢u
 		query = query.delete(query.length() - 1, query.length());
-		// đưa câu lệnh điều kiện vào trong query
+		// Ä‘Æ°a cÃ¢u lá»‡nh Ä‘iá»�u kiá»‡n vÃ o trong query
 		this.AddCondition(query, Condition);
-		// chèn ký tự ; vào cuồi dòng lệnh để cách các câu lệnh
+		// chÃ¨n kÃ½ tá»± ; vÃ o cuá»“i dÃ²ng lá»‡nh Ä‘á»ƒ cÃ¡ch cÃ¡c cÃ¢u lá»‡nh
 		query.append(";");
 		System.out.println(query);
-		// thực thi và trả ra kết quả
+		// thá»±c thi vÃ  tráº£ ra káº¿t quáº£
 		return this.connect.executeUpdate(query.toString()) > 0;
 	}
-	// Hàm delete hỗ trợ torng CDSL
+	// HÃ m delete há»— trá»£ torng CDSL
 	public boolean Delete(String TableName, String Condition) throws Exception {
-		// khai báo biến StringBuilder để tạo chuỗi Select
+		// khai bÃ¡o biáº¿n StringBuilder Ä‘á»ƒ táº¡o chuá»—i Select
 		StringBuilder query = new StringBuilder("Delete From " + TableName);
-		// Đưa câu lệnh điều kiện vào query
+		// Ä�Æ°a cÃ¢u lá»‡nh Ä‘iá»�u kiá»‡n vÃ o query
 		this.AddCondition(query, Condition);
-		// chèn ký tự ; vào cuối dòng lệnh để ngăn cách các câu
+		// chÃ¨n kÃ½ tá»± ; vÃ o cuá»‘i dÃ²ng lá»‡nh Ä‘á»ƒ ngÄƒn cÃ¡ch cÃ¡c cÃ¢u
 		query.append(";");
 		System.out.println(query);
-		// thực thi và trả về giá trị
+		// thá»±c thi vÃ  tráº£ vá»� giÃ¡ trá»‹
 		return this.connect.executeUpdate(query.toString()) > 0;
 	}
 
-	// hàm đếm số cột trong CSDL
+	// hÃ m Ä‘áº¿m sá»‘ cá»™t trong CSDL
 	public static int getColumnCount(ResultSet result) throws SQLException {
 		return result.getMetaData().getColumnCount();
 	}
 
-	// hàm đóng kết nối
+	// hÃ m Ä‘Ã³ng káº¿t ná»‘i
 	public void Close() throws Exception {
 		this.connect.Close();
 	}
+
 }
